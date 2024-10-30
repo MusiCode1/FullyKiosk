@@ -1,0 +1,34 @@
+[
+    {
+        "status": 1,
+        "url": "https://gingim.net/login/*",
+        "action": "FILL_FIELD",
+        "target": "TARGET_BY_ID",
+        "id": "user_login",
+        "value": "צוהר לטוהר"
+    },
+    {
+        "status": 1,
+        "url": "https://gingim.net/login/*",
+        "action": "FILL_FIELD",
+        "target": "TARGET_BY_ID",
+        "id": "user_pass",
+        "value": "רכסים"
+    },
+    {
+        "status": 1,
+        "url": "https://gingim.net/login/*",
+        "action": "TOGGLE_CHECKBOX",
+        "target": "TARGET_BY_ID",
+        "id": "rememberme",
+        "value": "true"
+    },
+    {
+        "status": 1,
+        "url": "https://gingim.net/login/*",
+        "action": "CLICK_BUTTON_LINK",
+        "target": "TARGET_BY_NAME",
+        "id": "submit",
+        "value": ""
+    }
+]

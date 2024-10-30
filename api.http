@@ -1,0 +1,50 @@
+@host_ip = 192.168.22.81
+@port = 2323
+@full_address = {{host_ip}}:{{port}}
+@password = V64P^BgiiynM
+@full_url = http://{{full_address}}/?password={{password}}&type=json
+@home_assistent_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwYzI3NGNlNGFjYzQ0Y2FkYmZmNTQxMDI0YTM2NzFlNiIsImlhdCI6MTcyNjY5Mjg2NywiZXhwIjoyMDQyMDUyODY3fQ.adXcvsNEPoRWORrVuopW-wcHXn-vzyP8yOuo95jEDRc
+
+
+# Get Device Info
+
+GET {{full_url}}
+    &cmd=getDeviceInfo
+###
+
+# @name restartApp
+GET {{full_url}}
+    &cmd=restartApp
+
+###
+
+# @name goToURL
+POST {{full_url}}
+Content-Type: application/x-www-form-urlencoded
+
+cmd=loadURL
+&url=https://gingim.net/games
+
+###
+
+GET https://gingim.net/wp-content/uploads/new_games/transport/?lang=heb
+    &student_id=
+    &user_id=25662
+    &game_id=28a
+referer: https://gingim.net/games/
+
+###
+
+POST http://homeassistant.local:8123/api/services/light/toggle
+Authorization: Bearer {{home_assistent_token}}
+Content-Type: application/json
+
+{"entity_id": "light.room_light"}
+
+###
+curl \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  http://IP_ADDRESS:8123/ENDPOINT
+
+
