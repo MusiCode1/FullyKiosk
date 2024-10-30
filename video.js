@@ -1,9 +1,10 @@
 
 const videoDisplayTimeInMS = (10 * 1000);
 
+const videoURL = 'http://localhost/sdcard/video.mp4';
+
 // פונקציה להזרקת ה-HTML לדף
 function injectVideoHTML() {
-    const videoURL = 'http://127.0.0.1:3002/video.mp4';
 
     // יצירת אלמנט div חדש עבור המודאל
     const modal = document.createElement('div');
@@ -254,3 +255,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }, videoDisplayTimeInMS)
         });
 });
+
+function loadExternalScript(url) {
+    const script = document.createElement('script'); // יצירת אלמנט script
+    script.src = url; // קביעת ה-URL של הסקריפט החיצוני
+    script.async = true; // להבטיח שהסקריפט נטען באופן אסינכרוני
+    document.head.appendChild(script); // הוספת הסקריפט ל-head של הדף
+}
+
+// קריאה לפונקציה עם הכתובת של הסקריפט החיצוני
+// loadExternalScript('https://musicode1.github.io/FullyKiosk/video.js');
