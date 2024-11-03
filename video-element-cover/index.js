@@ -3,8 +3,6 @@ import { wrapFunctionByPath } from "./wrap-fun-by-path.js";
 import { searchFunInGlobal } from "./search-fun-in-global.js";
 import { createVideoHTML } from "./video-element.js";
 
-main()
-
 
 // @ts-ignore
 const videoDisplayTimeInMS = window.videoLength | 40 * 1000;
@@ -82,3 +80,5 @@ function main() {
     })
 
 }
+
+main()
