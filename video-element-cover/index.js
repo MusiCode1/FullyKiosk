@@ -2,6 +2,7 @@
 import { wrapFunctionByPath } from "./wrap-fun-by-path.js";
 import { searchFunInGlobal } from "./search-fun-in-global.js";
 import { createVideoHTML } from "./video-element.js";
+import { gameConfigs as gameConfigsFromFile } from "./game-configs.js";
 
 
 // @ts-ignore
@@ -9,22 +10,13 @@ const videoDisplayTimeInMS = window.videoLength || 40 * 1000;
 // @ts-ignore
 const videoURL = window.videoURL || 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 
-
+const gameConfigs = window.gameConfigs || gameConfigsFromFile;
 
 // const fnName = 'onSoundFinnished' | 'makeMovie';
 
 // const videoURL = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 // 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 // 'http://localhost/sdcard/video.mp4'
-
-const gamesConfigs = [
-    {
-        gameName: 'tidy_up',
-        functionName: 'makeMovie',
-        delay: 5 * 1000,
-        path: '/wp-content/uploads/new_games/tidy_up/'
-    }
-];
 
 function loadElements() {
     const { modal, modalManager } = createVideoHTML(videoURL);
@@ -46,7 +38,7 @@ function loadElements() {
 
 function searchGame(path) {
 
-    return gamesConfigs.find((v) => path.includes(v.path))
+    return gameConfigs.find((v) => path.includes(v.path))
 }
 
 async function sleep(ms) {
@@ -59,7 +51,7 @@ function main() {
 
     if (!gameConfig) return;
 
-    const { modalManager, modal} = loadElements();
+    const { modalManager, modal } = loadElements();
 
     window.modalManager = modalManager;
     window.video = modal.querySelector('video');
