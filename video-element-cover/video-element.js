@@ -31,6 +31,10 @@ function volumeFade(videoElement, action, duration = 2000) {
     }
 }
 
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 // פונקציה להזרקת ה-HTML לדף
 export function createVideoHTML(videoURL) {
 
@@ -70,7 +74,8 @@ export function createVideoHTML(videoURL) {
     modal.appendChild(mainContainer); // הוספת mainContainer למודאל
 
     const css = document.createElement('link');
-    css.href = './style.css';
+    
+    css.href = new URL('./style.css', import.meta.url).href;
     css.rel = 'stylesheet';
 
     document.head.appendChild(css);
@@ -82,12 +87,13 @@ export function createVideoHTML(videoURL) {
         show() {
             this.status = 'show';
             modal.classList.add('show');
+            const sleepMS = 1000 * 2;
 
             setTimeout(() => {
 
                 volumeFade(video, 'fadeIn');
 
-            }, 1000 * 2);
+            }, sleepMS);
         },
 
         hide() {

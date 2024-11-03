@@ -5,9 +5,9 @@ import { createVideoHTML } from "./video-element.js";
 
 
 // @ts-ignore
-const videoDisplayTimeInMS = window.videoLength | 40 * 1000;
+const videoDisplayTimeInMS = window.videoLength || 40 * 1000;
 // @ts-ignore
-const videoURL = window.videoURL | 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+const videoURL = window.videoURL || 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 
 
 
@@ -41,17 +41,17 @@ function loadElements() {
         document.body.appendChild(modal);
     }
 
-    return { modalManager };
+    return { modalManager, modal };
 }
 
 function searchGame(path) {
-    return gamesConfigs.find((v) => v.path === path)
+
+    return gamesConfigs.find((v) => path.includes(v.path))
 }
 
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
-
 
 function main() {
 
@@ -59,7 +59,7 @@ function main() {
 
     if (!gameConfig) return;
 
-    const { modalManager } = loadElements();
+    const { modalManager, modal} = loadElements();
 
     window.modalManager = modalManager;
     window.video = modal.querySelector('video');

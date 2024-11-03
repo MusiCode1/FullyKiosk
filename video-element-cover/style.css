@@ -16,25 +16,25 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    
     /* מעל כל דבר אחר */
 
 }
 
 .modal {
-    display: none;
+    z-index: -1;
 }
 
 .modal,
 .main-container {
-    transition: opacity 1s;
+    transition: all 1s;
     opacity: 0;
 
 }
 
 .modal.show {
     opacity: 1;
-    display: flex;
+    z-index: 1000;
 }
 
 .modal.show .main-container {
