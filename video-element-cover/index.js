@@ -3,6 +3,7 @@ import { wrapFunctionByPath } from "./wrap-fun-by-path.js";
 import { searchFunInGlobal } from "./search-fun-in-global.js";
 import { createVideoHTML } from "./video-element.js";
 import { gameConfigs as gameConfigsFromFile } from "./game-configs.js";
+import { InjectCodeIntoIframe } from "./load-external-script.js";
 
 
 // @ts-ignore
@@ -45,7 +46,7 @@ async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-function main() {
+function loadAndSetVideoElement() {
 
     const gameConfig = searchGame(window.location.pathname);
 
@@ -71,6 +72,20 @@ function main() {
         modalManager.hide();
     })
 
+}
+
+function main(){
+
+    if (window.self !== window.top) {
+        console.log("The page is inside an iframe.");
+        loadAndSetVideoElement();
+
+    } else {
+        console.log("The page is not inside an iframe.");
+        InjectCodeIntoIframe();
+        
+    }
+    
 }
 
 main()
