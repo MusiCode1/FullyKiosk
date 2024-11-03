@@ -1,0 +1,19 @@
+@host_ip = 192.168.33.4
+
+@port = 2323
+
+@full_address = {{host_ip}}:{{port}}
+
+@password = V64P^BgiiynM
+
+@full_url = http://{{full_address}}/?password={{password}}&type=json
+###
+
+# @name StartApplication
+GET {{full_url}}
+    &cmd=startApplication
+    &package=com.edujoy.fidget.pop.it
+###
+GET {{full_url}}
+    &cmd=toForeground
+
