@@ -1,7 +1,7 @@
 
-import { wrapFunctionByPath } from "./wrap-fun-by-path";
-import { searchFunInGlobal } from "./search-fun-in-global";
-import { createVideoHTML } from "./video-element";
+import { wrapFunctionByPath } from "./wrap-fun-by-path.js";
+import { searchFunInGlobal } from "./search-fun-in-global.js";
+import { createVideoHTML } from "./video-element.js";
 
 main()
 
