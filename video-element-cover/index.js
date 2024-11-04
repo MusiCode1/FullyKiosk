@@ -21,25 +21,12 @@ const gameConfigs = window.gameConfigs || gameConfigsFromFile;
 
 function loadElements() {
 
-    function load() {
-        document.body.appendChild(modal);
-        console.log('The elements have been loaded successfully!');
-
-    }
-
     const { modal, modalManager } = createVideoHTML(videoURL);
 
     console.log(document.readyState);
 
-    if (document.readyState !== 'complete') {
-
-        window.onload = () => {
-            load()
-        }
-
-    } else {
-        load()
-    }
+    document.body.appendChild(modal);
+    console.log('The elements have been loaded successfully!');
 
     return { modalManager, modal };
 }
