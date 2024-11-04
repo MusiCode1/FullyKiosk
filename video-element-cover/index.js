@@ -74,29 +74,33 @@ async function loadAndSetVideoElement() {
         await sleep(videoDisplayTimeInMS + gameConfig.delay);
 
         modalManager.hide();
-    })
+    });
 
+    console.log('The video element has successfully loaded!');
 }
 
-function main() {
+async function main() {
 
     console.log(`The script runs under the address ${window.location.href}`);
 
     if (window.self !== window.top) {
         console.log("The page is inside an iframe.");
-        loadAndSetVideoElement();
+        await loadAndSetVideoElement();
 
     } else {
         console.log("The page is not inside an iframe.");
 
         if (window.location.href.includes('new_game')) {
-            loadAndSetVideoElement();
+            await loadAndSetVideoElement();
         } else {
             InjectCodeIntoIframe();
         }
 
     }
 
+    console.log("!");
+
+
 }
 
-main()
+main().then(() => console.log('!!'));
