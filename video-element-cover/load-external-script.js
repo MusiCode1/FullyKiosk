@@ -41,9 +41,9 @@ function loadExternalScript(url) {
     document.head.appendChild(script);
 }
 
+// loadExternalScript(`https://musicode1.github.io/FullyKiosk/video-element-cover/index.js?v=0.1`)
+
 export {
     InjectCodeIntoIframe,
     loadExternalScript
 }
-
-// loadExternalScript(`https://musicode1.github.io/FullyKiosk/video-element-cover/index.js?v=${v}`)
