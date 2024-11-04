@@ -20,6 +20,13 @@ const gameConfigs = window.gameConfigs || gameConfigsFromFile;
 // 'http://localhost/sdcard/video.mp4'
 
 function loadElements() {
+
+    function load() {
+        document.body.appendChild(modal);
+        console.log('The elements have been loaded successfully!');
+        
+    }
+
     const { modal, modalManager } = createVideoHTML(videoURL);
 
     console.log(document.readyState);
@@ -27,11 +34,11 @@ function loadElements() {
     if (document.readyState !== 'complete') {
 
         window.onload = () => {
-            document.body.appendChild(modal);
+            load()
         }
 
     } else {
-        document.body.appendChild(modal);
+        load()
     }
 
     return { modalManager, modal };
@@ -57,9 +64,11 @@ function loadAndSetVideoElement() {
     window.modalManager = modalManager;
     window.video = modal.querySelector('video');
 
-    const fnPath = searchFunInGlobal(gameConfig.functionName)?.[0];
+    const fnPath = searchFunInGlobal(gameConfig.functionName)?.[0];    
 
     if (!fnPath) throw new Error("No wrapping function found.");
+
+    console.log('Function search successfully completed!');
 
     wrapFunctionByPath(fnPath, null, async () => {
 
@@ -76,6 +85,8 @@ function loadAndSetVideoElement() {
 
 function main(){
 
+    console.log(`The script runs under the address ${window.location.href}`);
+
     if (window.self !== window.top) {
         console.log("The page is inside an iframe.");
         loadAndSetVideoElement();
@@ -83,7 +94,7 @@ function main(){
     } else {
         console.log("The page is not inside an iframe.");
         InjectCodeIntoIframe();
-        
+
     }
     
 }
