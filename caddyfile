@@ -1,0 +1,17 @@
+# for local scoure sever
+localhost {
+	file_server browse
+
+	@cors_preflight {
+		method OPTIONS
+	}
+	respond @cors_preflight 204
+
+	header {
+		Access-Control-Allow-Origin https://gingim.net
+		Access-Control-Allow-Methods GET, POST, OPTIONS
+		Access-Control-Allow-Headers Content-Type, User-Agent
+		Access-Control-Allow-Private-Network true
+		Access-Control-Allow-Credentials true
+	}
+}

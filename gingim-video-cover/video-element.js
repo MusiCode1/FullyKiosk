@@ -1,4 +1,4 @@
-
+import logger from './logger.js';
 
 function volumeFade(videoElement, action, duration = 2000) {
     // מקבל את הווידאו, הפעולה ("fadeIn" או "fadeOut"), ומשך הזמן (במילישניות)
@@ -57,6 +57,7 @@ export function createVideoHTML(videoURL) {
 
     // יצירת אלמנט ווידאו
     const video = document.createElement('video');
+    video.controls = true;
     const source = document.createElement('source');
     source.src = videoURL;
     //source.type = 'video/mp4';
@@ -74,7 +75,7 @@ export function createVideoHTML(videoURL) {
     modal.appendChild(mainContainer); // הוספת mainContainer למודאל
 
     const css = document.createElement('link');
-    
+
     css.href = new URL('./style.css', import.meta.url).href;
     css.rel = 'stylesheet';
 
@@ -87,13 +88,8 @@ export function createVideoHTML(videoURL) {
         show() {
             this.status = 'show';
             modal.classList.add('show');
-            const sleepMS = 1000 * 2;
 
-            setTimeout(() => {
-
-                volumeFade(video, 'fadeIn');
-
-            }, sleepMS);
+            volumeFade(video, 'fadeIn');
         },
 
         hide() {
@@ -104,13 +100,15 @@ export function createVideoHTML(videoURL) {
         },
 
         toggle() {
-            if(this.status === 'show') {
+            if (this.status === 'show') {
                 this.hide()
             } else {
                 this.show()
             }
         }
     }
+
+    logger.log()
 
     return { modal, modalManager }
 
