@@ -32,9 +32,36 @@ function loadElements() {
     return { modalManager, modal };
 }
 
-function getGameConfig(path) {
+function pullGameConfig(path) {
 
     return gameConfigs.find((v) => path.includes(v.urlPath))
+}
+
+function getGameConfig() {
+    const gameConfig = pullGameConfig(window.location.pathname);
+
+    if (!gameConfig) {
+        return false;
+    };
+
+    let triggerFuncPath = gameConfig?.triggerFunc?.path;
+    let triggerFuncCode = getFunctionByPath(triggerFuncPath)?.func;
+
+    if (!triggerFuncCode || typeof triggerFuncCode !== 'function') {
+
+        triggerFuncPath = searchFunInGlobal(gameConfig.triggerFunc.name)?.[0];
+
+        if (!triggerFuncPath) throw new Error("No wrapping function found.");
+
+        gameConfig.triggerFunc.path = triggerFuncPath;
+
+        logger.log('Function search successfully completed!');
+    } else {
+
+        logger.log('Trigger function successfully extracted from configuration!')
+    }
+
+    return gameConfig;
 }
 
 async function sleep(ms) {
@@ -48,31 +75,18 @@ async function loadAndSetVideoElement() {
         await new Promise(resolve => window.onload = resolve)
     }
 
-    const gameConfig = getGameConfig(window.location.pathname);
+    const gameConfig = getGameConfig();
 
-    if (!gameConfig) return;
-
-    let triggerFuncPath = gameConfig?.triggerFunc?.path;
-    let triggerFunc = getFunctionByPath(triggerFuncPath)?.func;
-
-    if (!triggerFunc || typeof triggerFunc !== 'function') {
-
-        triggerFuncPath = searchFunInGlobal(gameConfig.functionName)?.[0];
-
-        if (!triggerFuncPath) throw new Error("No wrapping function found.");
-
-        logger.log('Function search successfully completed!');
-    } else {
-
-        logger.log('Trigger function successfully extracted from configuration!')
+    if (!gameConfig) {
+        console.info('The current game is not yet supported.');
+        return;
     }
 
-    
-    logger.log('path:', triggerFuncPath);
+    logger.log('path:', gameConfig.triggerFunc.path);
 
     const { modalManager, modal } = loadElements();
 
-    wrapFunctionByPath(triggerFuncPath, null, async () => {
+    wrapFunctionByPath(gameConfig.triggerFunc.path, null, async () => {
 
         logger.log('Video playback begins...');
 

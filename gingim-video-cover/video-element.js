@@ -53,7 +53,7 @@ export function createVideoHTML(videoURL) {
 
     // הוספת כותרת
     const title = document.createElement('h1');
-    title.innerText = 'עכשיו מגיע לישי פרס: סרטון!';
+    title.innerText = 'הגיע הזמן לסרטון!';
 
     // יצירת אלמנט ווידאו
     const video = document.createElement('video');

@@ -1,4 +1,7 @@
-const functionsList = {
+
+const rootPath = 'PIXI.game.state.states.game';
+
+export const functionsList = {
 
     makeMovie: {
         name: 'makeMovie',
@@ -6,9 +9,16 @@ const functionsList = {
     },
 
     onShowAnimation: {
-        name: 'makeMovie',
-        path: 'PIXI.game.state.states.game.makeMovie'
+        name: 'onShowAnimation',
+        path: 'PIXI.game.state.states.game.onShowAnimation'
     }
+};
+
+export const defaultGame = {
+    gameName: 'default',
+    triggerFunc: null,
+    delay: 5 * 1000,
+    urlPath: null
 };
 
 export const gameConfigs = [
@@ -23,6 +33,12 @@ export const gameConfigs = [
         triggerFunc: functionsList.makeMovie,
         delay: 5 * 1000,
         urlPath: 'wp-content/uploads/new_games/touch_go/'
+    },
+    {
+        gameName: 'earase_animals',
+        triggerFunc: functionsList.onShowAnimation,
+        delay: 5 * 1000,
+        urlPath: '/wp-content/uploads/new_games/earase_animals/'
     },
     {
         gameName: 'earase_animals',
